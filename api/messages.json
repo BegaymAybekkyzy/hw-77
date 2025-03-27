@@ -1,0 +1,17 @@
+[
+  {
+    "author": "Anonymous",
+    "message": "Hello",
+    "image": "f388fc8a-68e7-4bb5-b5c7-647f65fb5a9a.png"
+  },
+  {
+    "author": "Anonymous",
+    "message": "test",
+    "image": "03338ccc-cdca-40dc-8df5-791776b49440.png"
+  },
+  {
+    "author": "Anonymous",
+    "image": null,
+    "message": "only message"
+  }
+]
