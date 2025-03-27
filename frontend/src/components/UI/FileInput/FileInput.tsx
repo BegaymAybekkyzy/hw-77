@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Grid from "@mui/material/Grid";
 import {Button, TextField} from "@mui/material";
 
@@ -9,14 +9,21 @@ interface Props {
     helperText?: string;
     errors?: boolean;
     disabled?: boolean;
+    resetFileInput?: () => void;
 }
 
-const FileInput: React.FC<Props> = ({onChange, name, label, helperText, errors = false, disabled = false}) => {
+const FileInput: React.FC<Props> = (
+    {onChange, name, label, helperText, errors = false, disabled = false, resetFileInput}) => {
+
     const inputRef = useRef<HTMLInputElement>(null);
     const [filename, setFilename] = useState('');
 
+    useEffect(() => {
+        setFilename('');
+    }, []);
+
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files &&  e.target.files[0]) {
+        if (e.target.files && e.target.files[0]) {
             setFilename(e.target.files[0].name);
         } else {
             setFilename('');
@@ -30,6 +37,10 @@ const FileInput: React.FC<Props> = ({onChange, name, label, helperText, errors =
             inputRef.current.click();
         }
     };
+
+    useEffect(() => {
+        setFilename('');
+    }, [resetFileInput]);
 
     return (
         <>

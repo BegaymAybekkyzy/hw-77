@@ -1,10 +1,10 @@
 import MessageForm from "./components/MessageForm/MessageForm.tsx";
-import {Box, Typography, Grid} from "@mui/material";
+import {Box, Typography, Grid, Container} from "@mui/material";
 import Layout from "./components/Layout/Layout.tsx";
 import {IMessage} from "./types";
 import {useAppDispatch, useAppSelector} from "./app/hooks.ts";
 import {fetchAllMessages, submitNewMessage} from "./store/Messages/messagesThunks.ts";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {selectFetchingLoading, selectMessages} from "./store/Messages/messagesSlice.ts";
 import MessagesCard from "./components/MessagesCard/MessagesCard.tsx";
 import Loader from "./components/UI/Loader/Loader.tsx";
@@ -20,7 +20,7 @@ const App = () => {
 
     const onCreateNewProduct = async (message: IMessage) => {
         try {
-            dispatch(submitNewMessage(message))
+            await dispatch(submitNewMessage(message));
         } catch (e) {
             console.error(e);
         }
@@ -60,18 +60,20 @@ const App = () => {
 
     return (
         <Layout>
-            {content}
+            <Container>
+                {content}
+            </Container>
 
             <Box sx={{
                 position: "sticky",
                 bottom: 0,
-                width: "110%",
+                width: "100%",
                 background: "white",
                 zIndex: 1000,
                 marginTop: "50px"
             }}>
                 <hr/>
-                <Box sx={{width: "70%", ml: "auto", mr: "auto"}}>
+                <Box sx={{width: "50%", ml: "auto", mr: "auto"}}>
                     <MessageForm onSubmitProduct={onCreateNewProduct}/>
                 </Box>
             </Box>

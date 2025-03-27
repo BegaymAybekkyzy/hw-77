@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, TextField} from "@mui/material";
 import Grid from '@mui/material/Grid';
 import {IMessage} from "../../types";
@@ -15,8 +15,9 @@ interface Props {
 
 const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
     const loading = useAppSelector(selectSendingLoading);
+    const [fileInputReset, setFileInputReset] = useState(false);
 
-    const {register, handleSubmit, formState: {errors}, setValue} = useForm(
+    const {register, handleSubmit, formState: {errors}, setValue, reset} = useForm(
         {
             resolver: zodResolver(messageSchema),
             defaultValues: {
@@ -28,6 +29,8 @@ const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
 
     const onSubmitForm = async (data: IMessage) => {
         onSubmitProduct({...data});
+        reset();
+        setFileInputReset(true)
     };
 
     const fileInputChangeHandler = (eFile: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +71,12 @@ const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
                 </Grid>
 
                 <Grid sx={{marginBottom: 2}}>
-                    <FileInput disabled={loading} onChange={fileInputChangeHandler} name="image" label="image"/>
+                    <FileInput
+                        disabled={loading}
+                        onChange={fileInputChangeHandler}
+                        name="image"
+                        resetFileInput={() => setFileInputReset(!fileInputReset)}
+                        label="365x240 image"/>
                 </Grid>
 
                 <Grid>

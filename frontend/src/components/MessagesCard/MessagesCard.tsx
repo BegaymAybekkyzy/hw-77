@@ -12,7 +12,7 @@ const MessagesCard: React.FC<Props> = ({message, image = "", author="Anonymous"}
     let imagePath = "";
 
     if (image) {
-        imagePath = apiUrl + '/' + "images" + '/' + image;
+        imagePath = apiUrl + "images" + '/' + image;
     }
 
     return (
@@ -22,7 +22,7 @@ const MessagesCard: React.FC<Props> = ({message, image = "", author="Anonymous"}
                     component="img"
                     sx={{ height: 240, objectFit: "cover" }}
                     image={imagePath}
-                    title="green iguana"
+                    title={image ? image : "no image"}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
