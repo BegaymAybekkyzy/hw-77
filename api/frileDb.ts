@@ -35,6 +35,10 @@ const fileDb = {
         return message;
     },
 
+    async getAllMessages() {
+        return data;
+    },
+
     async save() {
         return fs.writeFile(fileName, JSON.stringify(data));
     }

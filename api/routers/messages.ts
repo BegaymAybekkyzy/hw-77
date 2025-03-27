@@ -5,6 +5,11 @@ import {ImageUpload} from "../multer";
 
 const messageRouter = express.Router();
 
+messageRouter.get("/", async (req, res) => {
+   const messages = await fileDb.getAllMessages();
+   res.send(messages);
+});
+
 messageRouter.post("/", ImageUpload.single("image"), async (req, res) => {
     if (!req.body.message || req.body.message.trim() === "") {
         res.status(400).send({error: "Please enter a message"});
