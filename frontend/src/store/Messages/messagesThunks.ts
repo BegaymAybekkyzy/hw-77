@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosAPI from "../../axiosAPI.ts";
-import {IMessage} from "../../types";
+import {IMessage, IMessageAPI} from "../../types";
 
-export const fetchAllMessages = createAsyncThunk<IMessage[], void>(
+export const fetchAllMessages = createAsyncThunk<IMessageAPI[], void>(
     "messages/fetchAllMessages",
     async () => {
         const response = await axiosAPI("messages");

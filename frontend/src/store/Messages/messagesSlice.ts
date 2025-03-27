@@ -1,10 +1,10 @@
-import {IMessage} from "../../types";
+import {IMessageAPI} from "../../types";
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchAllMessages, submitNewMessage} from "./messagesThunks.ts";
 import {RootState} from "../../app/store.ts";
 
 interface IMessagesState {
-    messages: IMessage[];
+    messages: IMessageAPI[];
     sendingLoading: boolean;
     fetchingLoading: boolean;
 }

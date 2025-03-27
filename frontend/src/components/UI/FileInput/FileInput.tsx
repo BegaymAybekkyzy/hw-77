@@ -8,9 +8,10 @@ interface Props {
     label: string;
     helperText?: string;
     errors?: boolean;
+    disabled?: boolean;
 }
 
-const FileInput: React.FC<Props> = ({onChange, name, label, helperText, errors = false }) => {
+const FileInput: React.FC<Props> = ({onChange, name, label, helperText, errors = false, disabled = false}) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [filename, setFilename] = useState('');
 
@@ -36,6 +37,7 @@ const FileInput: React.FC<Props> = ({onChange, name, label, helperText, errors =
                 style={{display: 'none'}}
                 type="file"
                 name={name}
+                disabled={disabled}
                 onChange={onFileChange}
                 ref={inputRef}
             />
@@ -52,7 +54,7 @@ const FileInput: React.FC<Props> = ({onChange, name, label, helperText, errors =
                     />
                 </Grid>
                 <Grid>
-                    <Button variant="contained" onClick={activateInput}>
+                    <Button disabled={disabled} variant="contained" onClick={activateInput}>
                         Browse
                     </Button>
                 </Grid>

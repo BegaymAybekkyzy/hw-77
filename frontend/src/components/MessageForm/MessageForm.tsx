@@ -6,12 +6,16 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {messageSchema} from "../../zodSchemas/messagesSchemas.ts";
 import {useForm} from "react-hook-form";
 import FileInput from "../UI/FileInput/FileInput.tsx";
+import {useAppSelector} from "../../app/hooks.ts";
+import {selectSendingLoading} from "../../store/Messages/messagesSlice.ts";
 
 interface Props {
     onSubmitProduct: (product: IMessage) => void;
 }
 
 const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
+    const loading = useAppSelector(selectSendingLoading);
+
     const {register, handleSubmit, formState: {errors}, setValue} = useForm(
         {
             resolver: zodResolver(messageSchema),
@@ -43,6 +47,7 @@ const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
                         fullWidth
                         {...register("author")}
                         variant="outlined"
+                        disabled={loading}
                         sx={{marginBottom: 2}}
                     />
                 </Grid>
@@ -56,19 +61,21 @@ const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
                             error={!!errors.message}
                             helperText={errors.message?.message}
                             variant="outlined"
+                            disabled={loading}
                             sx={{marginBottom: 2}}
                         />
                     </Grid>
                 </Grid>
 
                 <Grid sx={{marginBottom: 2}}>
-                    <FileInput onChange={fileInputChangeHandler} name="image" label="image"/>
+                    <FileInput disabled={loading} onChange={fileInputChangeHandler} name="image" label="image"/>
                 </Grid>
 
                 <Grid>
                     <Button
                         variant="contained"
                         type="submit"
+                        disabled={loading}
                         sx={{background: "#6A5ACD"}}
                     >Send</Button>
                 </Grid>
