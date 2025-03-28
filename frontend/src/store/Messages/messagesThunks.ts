@@ -17,10 +17,6 @@ export const submitNewMessage = createAsyncThunk<void, IMessage>(
             newMessage.image = null;
         }
 
-        if (!newMessage.author || newMessage.author.trim().length === 0) {
-            newMessage.author = "Anonymous";
-        }
-
         const formData = new FormData();
         const keys = Object.keys(newMessage) as (keyof IMessage)[];
 

@@ -27,7 +27,7 @@ const MessageForm: React.FC<Props> = ({onSubmitProduct}) => {
             }
         });
 
-    const onSubmitForm = async (data: IMessage) => {
+    const onSubmitForm = (data: IMessage) => {
         onSubmitProduct({...data});
         reset();
         setFileInputReset(true)

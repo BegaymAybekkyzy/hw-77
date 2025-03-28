@@ -16,11 +16,12 @@ const App = () => {
 
     useEffect(() => {
         dispatch(fetchAllMessages());
-    }, [dispatch]);
+    }, [dispatch, allMessages.length]);
 
     const onCreateNewProduct = async (message: IMessage) => {
         try {
             await dispatch(submitNewMessage(message));
+            await dispatch(fetchAllMessages());
         } catch (e) {
             console.error(e);
         }

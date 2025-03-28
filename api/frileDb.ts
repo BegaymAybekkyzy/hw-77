@@ -1,7 +1,6 @@
 import {existsSync} from "node:fs";
 import {promises as fs} from "fs";
 import {IMessage} from "./types";
-import crypto from "node:crypto";
 
 const fileName = "./messages.json";
 let data: IMessage[] = [];
